@@ -31,7 +31,7 @@ class GradientDescent:
         if not 0 < self.gamma < 1:
             raise ValueError(f"Expected value between 0 and 1; got {self.gamma}")
 
-    def run(self, x0: np.ndarray, max_iter=100):
+    def run(self, x0: np.ndarray, max_iter=1000):
         """
         Performs gradient decsent.
 
@@ -42,14 +42,15 @@ class GradientDescent:
         self.error_check(x0)
 
         x_prev = x0
-        x = x0 + self.epsilon * self.M
         i = 0
 
-        while np.linalg.norm(x - x_prev) < self.epsilon and i < max_iter:
-            temp = x
+        while i < max_iter:
             x = x_prev - self.gamma * self.gradient(x_prev)
-            x_prev = temp
             i += 1
+
+            if np.linalg.norm(x - x_prev) < self.epsilon:
+                break
+            x_prev = x
 
         res = {}
         res["success"] = i != max_iter

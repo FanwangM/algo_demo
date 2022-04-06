@@ -42,15 +42,14 @@ class GradientDescent:
         self.error_check(x0)
 
         x_prev = x0
+        x = x_prev - self.gamma * self.gradient(x_prev)
         i = 0
 
-        while i < max_iter:
-            x = x_prev - self.gamma * self.gradient(x_prev)
+        while np.linalg.norm(x - x_prev) >= self.epsilon and i < max_iter:
+            temp = x
+            x = x - self.gamma * self.gradient(x)
+            x_prev = temp
             i += 1
-
-            if np.linalg.norm(x - x_prev) < self.epsilon:
-                break
-            x_prev = x
 
         res = {}
         res["success"] = i != max_iter

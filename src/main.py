@@ -6,7 +6,7 @@ class GradientDescent:
     Class for gradient desecnt.
     """
 
-    def __init__(self, M: int, func, gradient, epsilon: float, gamma: float):
+    def __init__(self, M: int, func, gradient, epsilon: float, gamma: float) -> None:
         """
         :param M: Dimension of input vector.
         :param func: Function over which we are performing gradient descent.
@@ -20,7 +20,7 @@ class GradientDescent:
         self.epsilon = epsilon
         self.gamma = gamma
 
-    def error_check(self, x0: np.ndarray):
+    def error_check(self, x0: np.ndarray) -> None:
         """
         :param x0: Starting point (initial vector) of gradient descent.
         """
@@ -31,7 +31,7 @@ class GradientDescent:
         if not 0 < self.gamma < 1:
             raise ValueError(f"Expected value between 0 and 1; got {self.gamma}")
 
-    def run(self, x0: np.ndarray, max_iter=1000):
+    def run(self, x0: np.ndarray, max_iter=1000) -> dict:
         """
         Performs gradient decsent.
 
